@@ -19,7 +19,7 @@
     "test:e2e:chrome": "playwright test --project='chromium'"
   },
   "engines": {
-    "node": ">=18.17.0"
+    "node": ">=20.x"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.11.5",
