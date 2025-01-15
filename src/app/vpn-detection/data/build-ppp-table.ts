@@ -1,5 +1,5 @@
 // Source https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.CD?end=2022
-// Surprisingly I couldn't find any publically available industry-standard PPP data
+// Surprisingly I couldn't find any publicly available industry-standard PPP data
 // Obviously GDP is just an imperfect heuristic for purchasing power, but good enough for our purposes here
 import gdpData from './gdp-capita-by-country.json';
 import fs from 'fs';

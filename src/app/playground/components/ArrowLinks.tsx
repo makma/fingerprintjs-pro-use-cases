@@ -52,7 +52,10 @@ export const JsonLink: FunctionComponent<{
         // scroll to property and highlight it
         const jsonProperties = document.querySelectorAll('.json-view--property');
         const foundElements = Array.from(jsonProperties).filter((el) => el.textContent === propertyName);
-        const targetElement = elementOrder === 'first' ? foundElements[0] : foundElements[foundElements.length - 1];
+        const targetElement =
+          elementOrder === 'first'
+            ? foundElements[0]
+            : (foundElements[foundElements.length - 1] as Element | undefined);
         if (targetElement) {
           if (targetElement.classList.contains(styles.jsonPropertyHighlighted)) {
             targetElement.classList.remove(styles.jsonPropertyHighlighted);

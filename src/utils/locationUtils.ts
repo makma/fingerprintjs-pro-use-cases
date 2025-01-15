@@ -8,11 +8,11 @@ export function getLocationName(ipLocation?: EventResponseIpInfoV4Geolocation, i
     return UNKNOWN_LOCATION;
   }
   const { city, country, subdivisions } = ipLocation;
-  if (city?.name && ipLocation.accuracyRadius && ipLocation?.accuracyRadius <= 50) {
+  if (city?.name && ipLocation.accuracyRadius && ipLocation.accuracyRadius <= 50) {
     addressParts.push(city.name);
   }
 
-  if (subdivisions?.[0]?.name && ipLocation.accuracyRadius && ipLocation?.accuracyRadius <= 100 && includeSubdivision) {
+  if (subdivisions?.[0]?.name && ipLocation.accuracyRadius && ipLocation.accuracyRadius <= 100 && includeSubdivision) {
     addressParts.push(subdivisions[0].name);
   }
 
@@ -28,7 +28,7 @@ export function getLocationName(ipLocation?: EventResponseIpInfoV4Geolocation, i
 }
 
 export const getIpLocation = (eventResponse?: EventResponse): EventResponseIpInfoV4Geolocation | undefined => {
-  return eventResponse?.products?.ipInfo?.data?.v4?.geolocation;
+  return eventResponse?.products.ipInfo?.data?.v4?.geolocation;
 };
 
 // Courtesy of https://dev.to/jorik/country-code-to-flag-emoji-a21

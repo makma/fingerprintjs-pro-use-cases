@@ -110,7 +110,7 @@ export function CouponFraudUseCase() {
                 {isLoading ? 'Processing...' : 'Apply'}
               </Button>
             </div>
-            {claimResponse?.message && !isLoading && (
+            {claimResponse?.message && (
               <div>
                 <Alert severity={claimResponse.severity}>{claimResponse.message}</Alert>
               </div>

@@ -52,7 +52,7 @@ test.describe('Playground page', () => {
   });
 
   test('Page renders signal tables', async ({ page }) => {
-    await page.getByText('Last seen', { exact: true }).waitFor();
+    await page.getByText('Last Seen', { exact: true }).waitFor();
     await page.getByText('Confidence Score', { exact: true }).waitFor();
 
     await page.getByText('Geolocation', { exact: true }).waitFor();

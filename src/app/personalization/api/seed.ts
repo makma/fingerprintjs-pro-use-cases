@@ -6,7 +6,7 @@ export async function seedProducts() {
     ProductDbModel.create({
       price: 9,
       name: `Extra strong coffee`,
-      image: '/personalization/img/extrastrong.svg',
+      image: '/personalization/img/extraStrong.svg',
       tags: ['Big'],
       timestamp: new Date().getTime().toString(),
     }),

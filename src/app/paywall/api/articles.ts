@@ -24,15 +24,17 @@ export const ARTICLES: ArticleData[] = [
     date: '1 hour ago',
     title: 'How to defend your site from common cyber attacks',
     description:
-      "Websites are an integral part of our lives, but that also makes them a prime target for cyberattacks — malicious attempts to exploit vulnerabilities in your website's security to steal sensitive information.",
+      "Websites are an integral part of our lives, but that also makes them a prime target for cyber attacks — malicious attempts to exploit vulnerabilities in your website's security to steal sensitive information.",
     content: [
-      "Websites are an integral part of our lives, but that also makes them a prime target for cyberattacks — malicious attempts to exploit vulnerabilities in your website's security to steal sensitive information, disrupt services, or cause other types of damage.",
-      'Depending on the nature of your website and services, successful cyberattacks can have severe consequences such as financial loss, reputational damage, and legal liabilities.',
-      "According to cybersecurity statistics compiled by Zippia, the cost of cybercrime is increasing significantly and is expected to grow by as much as 15% over the next five years. It's estimated that by 2025, cybercrime will cost the world roughly $10.5 trillion every year. Zippia estimates that 30,000 websites are hacked each day globally, with one happening every 39 seconds.",
-      'The good news is that 95% of cyberattacks are due to human error, which means that something can be done to prevent them. To help track and prevent common cyberattacks, the Open Web Application Security Project (OWASP), a nonprofit organization, maintains a list of the most prevalent security risks affecting websites, including injection attacks, security misconfigurations, and broken authentication. The project is a community-driven initiative that aims to improve the security of software and web applications.',
-      'By understanding these attacks and implementing appropriate security measures, you can better protect your websites from potential threats. In this article, you will learn about some of the common cyberattacks and how to implement defenses to ensure that your site is secure.',
+      "Websites are an integral part of our lives, but that also makes them a prime target for cyber attacks — malicious attempts to exploit vulnerabilities in your website's security to steal sensitive information, disrupt services, or cause other types of damage.",
+      'Depending on the nature of your website and services, successful cyber attacks can have severe consequences such as financial loss, reputation damage, and legal liabilities.',
+      /* cspell:disable-next-line */
+      "According to cybersecurity statistics compiled by Zippia, the cost of cyber crime is increasing significantly and is expected to grow by as much as 15% over the next five years. It's estimated that by 2025, cyber crime will cost the world roughly $10.5 trillion every year. Zippia estimates that 30,000 websites are hacked each day globally, with one happening every 39 seconds.",
+      'The good news is that 95% of cyber attacks are due to human error, which means that something can be done to prevent them. To help track and prevent common cyber attacks, the Open Web Application Security Project (OWASP), a nonprofit organization, maintains a list of the most prevalent security risks affecting websites, including injection attacks, security misconfigurations, and broken authentication. The project is a community-driven initiative that aims to improve the security of software and web applications.',
+      'By understanding these attacks and implementing appropriate security measures, you can better protect your websites from potential threats. In this article, you will learn about some of the common cyber attacks and how to implement defenses to ensure that your site is secure.',
     ],
     image: ArticleHeroSvg,
+    // cspell:disable-next-line
     author: { name: 'Daniel Olaogun', avatar: GenericAvatarImage },
     tags: ['Fingerprinting', 'Fraud'],
   },

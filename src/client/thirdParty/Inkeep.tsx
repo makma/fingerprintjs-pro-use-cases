@@ -1,6 +1,5 @@
 'use client';
 
-import { InkeepChatButtonProps } from '@inkeep/uikit';
 import type {
   InkeepAIChatSettings,
   InkeepSearchSettings,
@@ -9,6 +8,7 @@ import type {
 } from '@inkeep/uikit';
 import { env } from '../../env';
 import dynamic from 'next/dynamic';
+import { trackAskAIHelpChosen } from './Amplitude';
 
 /**
  * Inkeep (AI Help) chat button
@@ -36,9 +36,17 @@ const useInkeepSettings = (): InkeepSharedSettings => {
     integrationId,
     organizationId,
     primaryBrandColor: '#F04405',
-    //logEventCallback: customAnalyticsCallback,
+    logEventCallback: (event) => {
+      if (event.eventName === 'get_help_option_clicked') {
+        trackAskAIHelpChosen({
+          helpMethod: event.properties.name,
+          'Demo Page Path': document.location.pathname,
+          'Demo Page Title': document.title,
+        });
+      }
+    },
   };
-  const modalSettings: InkeepModalSettings = {};
+  const modalSettings: InkeepModalSettings = { defaultView: 'AI_CHAT', forceInitialDefaultView: true };
   const searchSettings: InkeepSearchSettings = {};
   const aiChatSettings: InkeepAIChatSettings = {
     chatSubjectName: 'Fingerprint',
@@ -54,6 +62,7 @@ const useInkeepSettings = (): InkeepSharedSettings => {
         name: 'Contact support',
         url: 'https://fingerprint.com/support/',
         icon: {
+          // cspell:disable-next-line
           builtIn: 'IoChatbubblesOutline',
         },
       },
@@ -78,20 +87,14 @@ const useInkeepSettings = (): InkeepSharedSettings => {
       'Fingerprint Identification vs FingerprintJS?',
       'How to proxy requests through my own domain?',
     ],
+    shouldOpenLinksInNewTab: true,
   };
 
   return { baseSettings, aiChatSettings, searchSettings, modalSettings };
 };
 
 export function InkeepChatButton() {
-  const { baseSettings, aiChatSettings, searchSettings, modalSettings } = useInkeepSettings();
+  const settings = useInkeepSettings();
 
-  const chatButtonProps: InkeepChatButtonProps = {
-    baseSettings,
-    aiChatSettings,
-    searchSettings,
-    modalSettings,
-  };
-
-  return <ChatButton {...chatButtonProps} />;
+  return <ChatButton {...settings} />;
 }

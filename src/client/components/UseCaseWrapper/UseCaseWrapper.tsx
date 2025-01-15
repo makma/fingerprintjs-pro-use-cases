@@ -26,6 +26,7 @@ type UseCaseWrapperProps = {
   returnUrl?: string;
   embed?: boolean;
   instructionsNote?: string;
+  noInnerPadding?: boolean;
 };
 
 export const UseCaseWrapper: FunctionComponent<UseCaseWrapperProps> = ({
@@ -34,8 +35,9 @@ export const UseCaseWrapper: FunctionComponent<UseCaseWrapperProps> = ({
   useCase,
   embed,
   instructionsNote,
+  noInnerPadding,
 }) => {
-  const { title, description, articleUrl, instructions, moreResources, doNotMentionResetButton } = useCase ?? {};
+  const { title, description, articleUrl, instructions, moreResources, doNotMentionResetButton } = useCase;
   const learnMoreRef = useRef<ElementRef<'h3'>>(null);
 
   const { mutate, shouldDisplayResetButton, isLoading } = useReset({});
@@ -104,7 +106,7 @@ export const UseCaseWrapper: FunctionComponent<UseCaseWrapperProps> = ({
             <div>
               {moreResourcesPresent && (
                 <Button
-                  onClick={() => learnMoreRef?.current?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => learnMoreRef.current?.scrollIntoView({ behavior: 'smooth' })}
                   size='large'
                   outlined
                   openNewTab
@@ -126,7 +128,7 @@ export const UseCaseWrapper: FunctionComponent<UseCaseWrapperProps> = ({
             <div />
             <div />
           </div>
-          <div className={styles.browserContent}>{children}</div>
+          <div className={classNames(styles.browserContent, noInnerPadding && styles.noPadding)}>{children}</div>
         </Container>
       </div>
 

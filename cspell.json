@@ -1,0 +1,52 @@
+{
+  "version": "0.2",
+  "words": [
+    "AIRMAX",
+    "ALLSTAR",
+    "botd",
+    "Catfished",
+    "chargeback",
+    "chargebacks",
+    "fingerprintdemo",
+    "fingerprinthub",
+    "fingerprintjs",
+    "Fintech",
+    "Flix",
+    "fpjs",
+    "Frida",
+    "Headout",
+    "inkeep",
+    "Jailbroken",
+    "Jumia",
+    "Juro",
+    "keshia",
+    "Korsit",
+    "mapbox",
+    "notistack",
+    "omnichannel",
+    "pastable",
+    "paypod",
+    "ruleset",
+    "rulesets",
+    "srcset",
+    "subheadline",
+    "Uhlar",
+    "unshredded",
+    "urlset",
+    "usequerystate",
+    "Webstore"
+  ],
+  "flagWords": [
+    "Cloudfront"
+  ],
+  "files": [
+    "**/*.md",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist",
+    "src/env.ts"
+  ]
+}

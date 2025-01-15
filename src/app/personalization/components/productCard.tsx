@@ -53,7 +53,7 @@ export const ProductCard: FunctionComponent<{ product: Product }> = ({ product }
 
   const removeFromCart = async () => {
     if (cartItem) {
-      await removeCartItemMutation.mutateAsync({ itemId: cartItem?.id });
+      await removeCartItemMutation.mutateAsync({ itemId: cartItem.id });
     }
   };
 

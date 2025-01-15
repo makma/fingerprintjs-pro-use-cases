@@ -53,12 +53,12 @@ export const saveBotVisit = async (botData: EventResponseBotData, visitorId: str
   BotVisitDbModel.create({
     ip: botData.ip,
     visitorId: visitorId,
-    requestId: botData.requestId ?? 'N/A',
-    timestamp: botData.time ?? 'N/A',
-    botResult: botData.bot.result ?? 'N/A',
-    botType: botData.bot.type ?? 'N/A',
-    userAgent: botData.userAgent ?? 'N/A',
-    url: botData.url ?? 'N/A',
+    requestId: botData.requestId,
+    timestamp: botData.time,
+    botResult: botData.bot.result,
+    botType: botData.bot.type ?? '',
+    userAgent: botData.userAgent,
+    url: botData.url,
   });
 };
 

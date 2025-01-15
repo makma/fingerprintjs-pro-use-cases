@@ -30,10 +30,10 @@ type FlightQueryResult = {
 const WebScraping: FunctionComponent = () => {
   const searchParams = useSearchParams();
   const [fromCode, setFromCode] = useQueryState('from', {
-    defaultValue: searchParams?.get('from')?.toUpperCase() ?? AIRPORTS[0].code,
+    defaultValue: searchParams.get('from')?.toUpperCase() ?? AIRPORTS[0].code,
   });
   const [toCode, setToCode] = useQueryState('to', {
-    defaultValue: searchParams?.get('to')?.toUpperCase() ?? AIRPORTS[1].code,
+    defaultValue: searchParams.get('to')?.toUpperCase() ?? AIRPORTS[1].code,
   });
 
   /**
@@ -68,7 +68,7 @@ const WebScraping: FunctionComponent = () => {
           from: fromCode,
           to: toCode,
           requestId,
-          disableBotDetection: Boolean(searchParams?.get('disableBotDetection')),
+          disableBotDetection: Boolean(searchParams.get('disableBotDetection')),
         } satisfies FlightQuery),
       });
       if (response.status < 500) {

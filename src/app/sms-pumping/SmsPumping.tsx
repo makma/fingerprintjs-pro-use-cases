@@ -88,7 +88,7 @@ const SmsFraud: FunctionComponent = () => {
 
   const searchParams = useSearchParams();
   const disableBotDetection =
-    searchParams?.get('disableBotDetection') === '1' || searchParams?.get('disableBotDetection') === 'true';
+    searchParams.get('disableBotDetection') === '1' || searchParams.get('disableBotDetection') === 'true';
 
   const [, copyToClipboard] = useCopyToClipboard();
   const sendMessageMutation = useSendMessage({

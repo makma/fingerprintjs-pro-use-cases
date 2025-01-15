@@ -31,7 +31,7 @@ type MapProps = {
 const MAPBOX_ACCESS_TOKEN = env.NEXT_PUBLIC_MAPBOX_API_TOKEN;
 
 export const Map: FunctionComponent<MapProps> = (props) => {
-  const defaultZoom = 9; // Shows you rougly inside a specific city
+  const defaultZoom = 9; // Shows you roughly inside a specific city
   return (
     <MapContainer
       center={props.position}

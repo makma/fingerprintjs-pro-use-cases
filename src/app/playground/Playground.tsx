@@ -152,12 +152,12 @@ export function Playground() {
     ],
     [
       {
-        content: <DocsLink href='https://dev.fingerprint.com/docs/useful-timestamps#definitions'>Last seen</DocsLink>,
+        content: <DocsLink href='https://dev.fingerprint.com/docs/useful-timestamps'>Last Seen</DocsLink>,
       },
       {
         content: agentResponse?.lastSeenAt.global ? (
           <JsonLink propertyName='lastSeenAt' elementOrder='first'>
-            {timeAgoLabel(agentResponse?.lastSeenAt.global)}
+            {timeAgoLabel(agentResponse.lastSeenAt.global)}
           </JsonLink>
         ) : (
           'Unknown'
@@ -168,7 +168,10 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/understanding-your-confidence-score' key='confidence'>
+          <DocsLink
+            href='https://dev.fingerprint.com/docs/identification-accuracy-and-confidence#confidence-score'
+            key='confidence'
+          >
             Confidence Score
           </DocsLink>,
         ],
@@ -186,18 +189,17 @@ export function Playground() {
     ],
   ];
 
-  const suspectScore = usedIdentificationEvent?.products?.suspectScore?.data?.result;
-  const remoteControl: boolean | undefined = usedIdentificationEvent?.products?.remoteControl?.data?.result;
+  const suspectScore = usedIdentificationEvent?.products.suspectScore?.data?.result;
+  const remoteControl: boolean | undefined = usedIdentificationEvent?.products.remoteControl?.data?.result;
 
-  const ipVelocity: number | undefined =
-    usedIdentificationEvent?.products?.velocity?.data?.distinctIp?.intervals?.['1h'];
+  const ipVelocity: number | undefined = usedIdentificationEvent?.products.velocity?.data?.distinctIp.intervals?.['1h'];
 
   const smartSignals: TableCellData[][] = [
     [
       {
         content: (
           <>
-            <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#ip-geolocation'>
+            <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#ip-geolocation'>
               Geolocation
             </DocsLink>
             <div className={styles.locationText}>
@@ -227,7 +229,7 @@ export function Playground() {
     [
       {
         content: (
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#browser-incognito-detection'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#browser-incognito-detection'>
             Incognito Mode
           </DocsLink>
         ),
@@ -235,16 +237,16 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='incognito'>
-            {usedIdentificationEvent?.products?.incognito?.data?.result ? 'You are incognito 🕶' : 'Not detected'}
+            {usedIdentificationEvent?.products.incognito?.data?.result ? 'You are incognito 🕶' : 'Not detected'}
           </JsonLink>
         ),
-        className: usedIdentificationEvent?.products?.incognito?.data?.result ? tableStyles.red : tableStyles.green,
+        className: usedIdentificationEvent?.products.incognito?.data?.result ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#browser-bot-detection' key='bot'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#browser-bot-detection' key='bot'>
             Bot
           </DocsLink>,
         ],
@@ -252,27 +254,30 @@ export function Playground() {
       {
         content: <JsonLink propertyName='botd'>{botDetectionResult({ event: usedIdentificationEvent })}</JsonLink>,
         className:
-          usedIdentificationEvent?.products?.botd?.data?.bot?.result === 'bad' ? tableStyles.red : tableStyles.green,
-      },
-    ],
-    [
-      {
-        content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#vpn-detection' key='vpn'>
-            VPN
-          </DocsLink>,
-        ],
-      },
-      {
-        content: <JsonLink propertyName='vpn'>{vpnDetectionResult({ event: usedIdentificationEvent })}</JsonLink>,
-        className: usedIdentificationEvent?.products?.vpn?.data?.result === true ? tableStyles.red : tableStyles.green,
+          usedIdentificationEvent?.products.botd?.data?.bot.result === 'bad' ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#browser-tamper-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#vpn-detection-for-browsers'
+            key='vpn'
+          >
+            VPN
+          </DocsLink>,
+        ],
+      },
+      {
+        content: <JsonLink propertyName='vpn'>{vpnDetectionResult({ event: usedIdentificationEvent })}</JsonLink>,
+        className: usedIdentificationEvent?.products.vpn?.data?.result === true ? tableStyles.red : tableStyles.green,
+      },
+    ],
+    [
+      {
+        content: [
+          <DocsLink
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#browser-tamper-detection'
             key='tamper'
           >
             Browser Tampering
@@ -282,19 +287,19 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='tampering'>
-            {usedIdentificationEvent?.products?.tampering?.data?.result === true ? 'Yes 🖥️🔧' : 'Not detected'}
+            {usedIdentificationEvent?.products.tampering?.data?.result === true ? 'Yes 🖥️🔧' : 'Not detected'}
           </JsonLink>
         ),
 
         className:
-          usedIdentificationEvent?.products?.tampering?.data?.result === true ? tableStyles.red : tableStyles.green,
+          usedIdentificationEvent?.products.tampering?.data?.result === true ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#developer-tools-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#developer-tools-detection'
             key='devtools'
           >
             Developer Tools
@@ -304,19 +309,17 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='developerTools'>
-            {usedIdentificationEvent?.products?.developerTools?.data?.result === true ? 'Yes 🔧' : 'Not detected'}
+            {usedIdentificationEvent?.products.developerTools?.data?.result === true ? 'Yes 🔧' : 'Not detected'}
           </JsonLink>
         ),
         className:
-          usedIdentificationEvent?.products?.developerTools?.data?.result === true
-            ? tableStyles.red
-            : tableStyles.green,
+          usedIdentificationEvent?.products.developerTools?.data?.result === true ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: (
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#virtual-machine-detection'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#virtual-machine-detection'>
             Virtual Machine
           </DocsLink>
         ),
@@ -324,20 +327,18 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='virtualMachine'>
-            {usedIdentificationEvent?.products?.virtualMachine?.data?.result === true ? 'Yes ☁️💻' : 'Not detected'}
+            {usedIdentificationEvent?.products.virtualMachine?.data?.result === true ? 'Yes ☁️💻' : 'Not detected'}
           </JsonLink>
         ),
 
         className:
-          usedIdentificationEvent?.products?.virtualMachine?.data?.result === true
-            ? tableStyles.red
-            : tableStyles.green,
+          usedIdentificationEvent?.products.virtualMachine?.data?.result === true ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: (
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#privacy-focused-settings'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#privacy-focused-settings'>
             Privacy Settings
           </DocsLink>
         ),
@@ -345,11 +346,11 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='privacySettings'>
-            {usedIdentificationEvent?.products?.privacySettings?.data?.result === true ? 'Yes 🙈💻' : 'Not detected'}
+            {usedIdentificationEvent?.products.privacySettings?.data?.result === true ? 'Yes 🙈💻' : 'Not detected'}
           </JsonLink>
         ),
         className:
-          usedIdentificationEvent?.products?.privacySettings?.data?.result === true
+          usedIdentificationEvent?.products.privacySettings?.data?.result === true
             ? tableStyles.red
             : tableStyles.green,
       },
@@ -358,7 +359,7 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#remote-control-tools-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#remote-control-tools-detection'
             key='remote-control-tools'
           >
             Remote Control Tools
@@ -384,7 +385,7 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#ip-blocklist-matching'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#ip-blocklist-matching'
             key='blocklist'
           >
             IP Blocklist
@@ -396,9 +397,9 @@ export function Playground() {
           <JsonLink propertyName='ipBlocklist'>{ipBlocklistResult({ event: usedIdentificationEvent })}</JsonLink>
         ),
         className:
-          usedIdentificationEvent?.products?.ipBlocklist?.data?.result ||
-          usedIdentificationEvent?.products?.proxy?.data?.result ||
-          usedIdentificationEvent?.products?.tor?.data?.result
+          usedIdentificationEvent?.products.ipBlocklist?.data?.result ||
+          usedIdentificationEvent?.products.proxy?.data?.result ||
+          usedIdentificationEvent?.products.tor?.data?.result
             ? tableStyles.red
             : tableStyles.green,
       },
@@ -407,7 +408,7 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#high-activity-device'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#high-activity-device'
             key='high-activity'
           >
             High-Activity Device
@@ -417,19 +418,19 @@ export function Playground() {
       {
         content: (
           <JsonLink propertyName='highActivity'>
-            {usedIdentificationEvent?.products?.highActivity?.data?.result === true ? 'Yes 🔥' : 'Not detected'}
+            {usedIdentificationEvent?.products.highActivity?.data?.result === true ? 'Yes 🔥' : 'Not detected'}
           </JsonLink>
         ),
 
         className:
-          usedIdentificationEvent?.products?.highActivity?.data?.result === true ? tableStyles.red : tableStyles.green,
+          usedIdentificationEvent?.products.highActivity?.data?.result === true ? tableStyles.red : tableStyles.green,
       },
     ],
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#velocity-signals' key='velocity '>
-            Velocity signals
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#velocity-signals' key='velocity '>
+            Velocity Signals
           </DocsLink>,
         ],
       },
@@ -446,7 +447,7 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#suspect-score' key='suspect-score'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#suspect-score' key='suspect-score'>
             Suspect Score
           </DocsLink>,
         ],
@@ -469,8 +470,8 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#raw-device-attributes' key='raw'>
-            Raw device attributes
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#raw-device-attributes' key='raw'>
+            Raw Device Attributes
           </DocsLink>,
         ],
       },
@@ -485,7 +486,7 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#frida-detection' key='frida'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#frida-detection' key='frida'>
             App is instrumented by Frida
           </DocsLink>,
         ],
@@ -495,7 +496,7 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection' key='reset'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#factory-reset-detection' key='reset'>
             Factory Reset Timestamp
           </DocsLink>,
         ],
@@ -506,10 +507,10 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#geolocation-spoofing-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#geolocation-spoofing-detection'
             key='spoof'
           >
-            Location spoofing
+            Location Spoofing
           </DocsLink>,
         ],
       },
@@ -518,7 +519,7 @@ export function Playground() {
     [
       {
         content: [
-          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-overview#cloned-app-detection' key='cloned'>
+          <DocsLink href='https://dev.fingerprint.com/docs/smart-signals-reference#cloned-app-detection' key='cloned'>
             Cloned App
           </DocsLink>,
         ],
@@ -529,7 +530,7 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#android-emulator-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#android-emulator-detection'
             key='emulator'
           >
             Emulator
@@ -542,10 +543,10 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#android-tamper-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#rooted-device-detection'
             key='tamper'
           >
-            Rooted device
+            Rooted Device
           </DocsLink>,
         ],
       },
@@ -556,7 +557,7 @@ export function Playground() {
       {
         content: [
           <DocsLink
-            href='https://dev.fingerprint.com/docs/smart-signals-overview#jailbroken-device-detection'
+            href='https://dev.fingerprint.com/docs/smart-signals-reference#jailbroken-device-detection'
             key='jailbroken'
           >
             Jailbroken device
@@ -604,7 +605,7 @@ export function Playground() {
                 <MyCollapsibleContent>
                   <div className={styles.visitorIdBox}>
                     <p>Your Visitor ID is </p>
-                    <h2 className={styles.visitorId}>{agentResponse?.visitorId}</h2>
+                    <h2 className={styles.visitorId}>{agentResponse.visitorId}</h2>
                   </div>
 
                   <SignalTable data={identificationSignals} />
@@ -656,7 +657,7 @@ export function Playground() {
                   </h4>
                   <CollapsibleJsonViewer
                     dataTestId={TEST_IDS.playground.agentResponseJSON}
-                    json={displayedAgentResponse ?? {}}
+                    json={displayedAgentResponse}
                   />
                 </div>
                 <div>
@@ -689,6 +690,16 @@ export function Playground() {
                   title: 'Intro to Device Intelligence Webinar',
                   url: 'https://www.youtube.com/watch?v=YTRmWUeQWyY',
                   type: 'Webinar',
+                },
+                {
+                  title: 'Android Playground app',
+                  url: 'https://play.google.com/store/apps/details?id=com.fingerprintjs.android.fpjs_pro_demo',
+                  type: 'Demo app',
+                },
+                {
+                  title: 'iOS Playground app',
+                  url: 'https://apps.apple.com/us/app/fingerprint-pro/id1644105278',
+                  type: 'Demo app',
                 },
               ]}
             />

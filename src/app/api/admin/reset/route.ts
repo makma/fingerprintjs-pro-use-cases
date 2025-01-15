@@ -33,7 +33,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ResetResponse
     return NextResponse.json({ severity: 'error', message: fingerprintResult.error }, { status: 403 });
   }
 
-  const { visitorId, ip } = fingerprintResult.data.products?.identification?.data ?? {};
+  const { visitorId, ip } = fingerprintResult.data.products.identification?.data ?? {};
   if (!visitorId) {
     return NextResponse.json({ severity: 'error', message: 'Visitor ID not found.' }, { status: 403 });
   }

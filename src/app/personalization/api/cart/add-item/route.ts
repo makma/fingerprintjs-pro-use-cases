@@ -28,7 +28,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<AddCartItemRe
   }
 
   // Get visitorId from the Server API Identification event
-  const visitorId = fingerprintResult.data.products?.identification?.data?.visitorId;
+  const visitorId = fingerprintResult.data.products.identification?.data?.visitorId;
   if (!visitorId) {
     return NextResponse.json({ severity: 'error', message: 'Visitor ID not found.' }, { status: 403 });
   }
@@ -48,14 +48,14 @@ export async function POST(req: NextRequest): Promise<NextResponse<AddCartItemRe
   const [cartItem, created] = await UserCartItemDbModel.findOrCreate({
     where: {
       visitorId: {
-        [Op.eq]: visitorId ?? '',
+        [Op.eq]: visitorId,
       },
       productId: {
         [Op.eq]: productId,
       },
     },
     defaults: {
-      visitorId: visitorId ?? '',
+      visitorId: visitorId,
       count: 1,
       timestamp: new Date(),
       productId,

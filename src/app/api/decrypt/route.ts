@@ -9,7 +9,7 @@ export type DecryptResponse = EventResponse;
 
 export async function POST(request: Request) {
   try {
-    const sealedData = ((await request?.json()) as DecryptPayload).sealedResult;
+    const sealedData = ((await request.json()) as DecryptPayload).sealedResult;
     const data = await decryptSealedResult(sealedData);
     return Response.json(data);
   } catch (e) {

@@ -18,7 +18,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Window {
     // eslint-disable-next-line @typescript-eslint/ban-types
-    dataLayer: object[];
+    dataLayer?: object[];
   }
 }
 

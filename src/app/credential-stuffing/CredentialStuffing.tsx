@@ -9,8 +9,8 @@ import Button from '../../client/components/Button/Button';
 import styles from './credentialStuffing.module.scss';
 import formStyles from '../../client/styles/forms.module.scss';
 import classNames from 'classnames';
-import hiddenIcon from './iconHidden.svg';
-import shownIcon from './iconShown.svg';
+import hiddenIcon from '../../client/img/iconHidden.svg';
+import shownIcon from '../../client/img/iconShown.svg';
 import Image from 'next/image';
 import { useVisitorData } from '@fingerprintjs/fingerprintjs-pro-react';
 import { TEST_IDS } from '../../client/testIDs';
@@ -85,7 +85,7 @@ export function CredentialStuffing() {
             <Image src={showPassword ? shownIcon : hiddenIcon} alt={showPassword ? 'Hide password' : 'Show password'} />
           </button>
           {loginNetworkError && <Alert severity='error'>{loginNetworkError.message}</Alert>}
-          {loginResponse?.message && !isLoading && (
+          {loginResponse?.message && (
             <Alert severity={loginResponse.severity} className={styles.alert}>
               {loginResponse.message}
             </Alert>

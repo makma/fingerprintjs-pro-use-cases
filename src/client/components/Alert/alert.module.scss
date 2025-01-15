@@ -9,6 +9,8 @@
   line-height: 160%;
   letter-spacing: 0.14px;
   overflow: hidden;
+  
+  position: relative;
 
   .iconWrapper {
     align-self: start;
@@ -129,4 +131,11 @@
   @include media('<=phone') {
     display: none;
   }
+}
+
+.alertCloseIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }

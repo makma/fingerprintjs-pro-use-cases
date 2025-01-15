@@ -129,12 +129,13 @@ export const env = createEnv({
     NEXT_PUBLIC_INKEEP_INTEGRATION_ID: process.env.NEXT_PUBLIC_INKEEP_INTEGRATION_ID,
     NEXT_PUBLIC_INKEEP_ORG_ID: process.env.NEXT_PUBLIC_INKEEP_ORG_ID,
   },
-  isServer:
-    // Comprehensive server check
-    // https://github.com/t3-oss/t3-env/issues/154
+  // Comprehensive server check
+  // https://github.com/t3-oss/t3-env/issues/154
+  isServer: Boolean(
     typeof window === 'undefined' ||
-    'Deno' in window ||
-    globalThis.process?.env?.['NODE_ENV'] === 'test' ||
-    !!globalThis.process?.env?.['JEST_WORKER_ID'] ||
-    !!globalThis.process?.env?.['VITEST_WORKER_ID'],
+      'Deno' in window ||
+      process.env['NODE_ENV'] === 'test' ||
+      process.env['JEST_WORKER_ID'] ||
+      process.env['VITEST_WORKER_ID'],
+  ),
 });

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<SubmitCodeRes
   }
 
   // If identification data is missing, return an error
-  const identification = fingerprintResult.data.products?.identification?.data;
+  const identification = fingerprintResult.data.products.identification?.data;
   if (!identification) {
     return NextResponse.json({ severity: 'error', message: 'Identification data not found.' }, { status: 403 });
   }
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<SubmitCodeRes
   // Retrieve SMS verification requests made by this browser to this phone number
   const latestSmsVerificationRequest = await SmsVerificationDatabaseModel.findOne({
     where: {
-      visitorId: identification?.visitorId,
+      visitorId: identification.visitorId,
       phoneNumberHash: hashString(phoneNumber),
       timestamp: {
         [Op.gte]: new Date(new Date().setHours(0, 0, 0, 0)),

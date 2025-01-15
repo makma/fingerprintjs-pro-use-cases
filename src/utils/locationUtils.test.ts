@@ -25,7 +25,7 @@ describe('getLocationName test', () => {
       getLocationName({
         accuracyRadius: 100,
         city: {
-          name: 'Guimarães',
+          name: 'Nova',
         },
         country: {
           code: 'PT',

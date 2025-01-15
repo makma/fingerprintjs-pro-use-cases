@@ -36,7 +36,7 @@ export function DropdownMenu({ name, className, darkMode, dropdownProps, onLinkC
         />
       </span>
       <AnimatePresence initial={false}>
-        {dropdownProps && isOpen && (
+        {isOpen && (
           <motion.div
             className={styles.dropdown}
             initial={{

@@ -13,8 +13,8 @@ export default function Paywall({ embed }: { embed: boolean }) {
   const gridArticles = ARTICLES.slice(1);
   return (
     <UseCaseWrapper useCase={USE_CASES.paywall}>
-      {heroArticle && <ArticleCard article={heroArticle} isHeroArticle embed={embed} />}
-      {gridArticles && <ArticleGrid articles={gridArticles} embed={embed} />}
+      <ArticleCard article={heroArticle} isHeroArticle embed={embed} />
+      <ArticleGrid articles={gridArticles} embed={embed} />
     </UseCaseWrapper>
   );
 }

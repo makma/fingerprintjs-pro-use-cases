@@ -171,22 +171,22 @@ export const BotFirewall: FunctionComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {botVisits?.slice(0, displayedVisits).map((botVisit) => {
+            {botVisits.slice(0, displayedVisits).map((botVisit) => {
               return (
-                <tr key={botVisit?.requestId}>
-                  <td>{formatDate(botVisit?.timestamp)}</td>
-                  <td>{botVisit?.requestId}</td>
+                <tr key={botVisit.requestId}>
+                  <td>{formatDate(botVisit.timestamp)}</td>
+                  <td>{botVisit.requestId}</td>
                   <td>
-                    {botVisit?.botResult} ({botVisit.botType})
+                    {botVisit.botResult} ({botVisit.botType})
                   </td>
-                  <td className={styles.wrapAndBreakTableCell}>{botVisit?.ip}</td>
+                  <td className={styles.wrapAndBreakTableCell}>{botVisit.ip}</td>
                   <td>
                     <BotVisitAction
-                      ip={botVisit?.ip}
-                      isBlockedNow={isIpBlocked(botVisit?.ip)}
+                      ip={botVisit.ip}
+                      isBlockedNow={isIpBlocked(botVisit.ip)}
                       blockIp={blockIp}
                       isLoadingBlockIp={isLoadingBlockIp}
-                      isVisitorsIp={botVisit?.ip === visitorData?.ip}
+                      isVisitorsIp={botVisit.ip === visitorData?.ip}
                     />
                   </td>
                 </tr>
@@ -197,32 +197,32 @@ export const BotFirewall: FunctionComponent = () => {
 
         {/* Display bot visits as **CARDS** only on small screens */}
         <div className={styles.cards}>
-          {botVisits?.slice(0, displayedVisits).map((botVisit) => {
+          {botVisits.slice(0, displayedVisits).map((botVisit) => {
             return (
               <div key={botVisit.requestId} className={styles.card}>
                 <div className={styles.cardContent}>
                   <div>Timestamp</div>
-                  <div>{formatDate(botVisit?.timestamp)}</div>
+                  <div>{formatDate(botVisit.timestamp)}</div>
 
                   <div>Request ID</div>
-                  <div>{botVisit?.requestId}</div>
+                  <div>{botVisit.requestId}</div>
 
                   <div>
                     Bot Type <BotTypeInfo />
                   </div>
                   <div>
-                    {botVisit?.botResult} ({botVisit.botType})
+                    {botVisit.botResult} ({botVisit.botType})
                   </div>
 
                   <div>IP Address</div>
-                  <div>{botVisit?.ip}</div>
+                  <div>{botVisit.ip}</div>
                 </div>
                 <BotVisitAction
-                  ip={botVisit?.ip}
-                  isBlockedNow={isIpBlocked(botVisit?.ip)}
+                  ip={botVisit.ip}
+                  isBlockedNow={isIpBlocked(botVisit.ip)}
                   blockIp={blockIp}
                   isLoadingBlockIp={isLoadingBlockIp}
-                  isVisitorsIp={botVisit?.ip === visitorData?.ip}
+                  isVisitorsIp={botVisit.ip === visitorData?.ip}
                 />
               </div>
             );
@@ -268,13 +268,13 @@ export const BotFirewall: FunctionComponent = () => {
 
           {content}
           {/* Display load older bot visits button if necessary */}
-          {botVisits && botVisits?.length > DEFAULT_DISPLAYED_VISITS ? (
+          {botVisits && botVisits.length > DEFAULT_DISPLAYED_VISITS ? (
             <Button
               size='medium'
               className={styles.loadMore}
               outlined
               onClick={() => setDisplayedVisits(displayedVisits + DISPLAYED_VISITS_INCREMENT)}
-              disabled={!botVisits || displayedVisits >= botVisits.length}
+              disabled={displayedVisits >= botVisits.length}
             >
               Show older bot visits
             </Button>

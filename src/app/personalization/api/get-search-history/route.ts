@@ -28,7 +28,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<SearchHistory
   }
 
   // Get visitorId from the Server API Identification event
-  const visitorId = fingerprintResult.data.products?.identification?.data?.visitorId;
+  const visitorId = fingerprintResult.data.products.identification?.data?.visitorId;
   if (!visitorId) {
     return NextResponse.json({ severity: 'error', message: 'Visitor ID not found.' }, { status: 403 });
   }

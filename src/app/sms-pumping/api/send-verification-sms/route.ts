@@ -100,7 +100,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<SendSMSRespon
   }
 
   // If identification data is missing, return an error
-  const visitorId = fingerprintResult.data.products?.identification?.data?.visitorId;
+  const visitorId = fingerprintResult.data.products.identification?.data?.visitorId;
   if (!visitorId) {
     return NextResponse.json({ message: 'Identification data not found.', severity: 'error' }, { status: 403 });
   }

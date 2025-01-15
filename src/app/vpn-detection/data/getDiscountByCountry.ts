@@ -11,6 +11,6 @@ export const getRegionalDiscount = (countryCode?: string) => {
   if (!countryCode) {
     return FALLBACK_DISCOUNT;
   }
-  const ppp = (pppByCountry as Record<string, number>)[countryCode] ?? 0.8;
+  const ppp = (pppByCountry as Record<string, number | undefined>)[countryCode] ?? 0.8;
   return roundToPlaces((1 - ppp) * 100, 2);
 };

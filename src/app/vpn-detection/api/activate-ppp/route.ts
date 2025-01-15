@@ -33,7 +33,7 @@ export async function POST(req: Request): Promise<NextResponse<ActivateRegionalP
 
   const location = getIpLocation(fingerprintResult.data);
   const locationName = getLocationName(location, false);
-  const vpnDetection = fingerprintResult.data.products?.vpn?.data;
+  const vpnDetection = fingerprintResult.data.products.vpn?.data;
 
   if (!location?.country) {
     return NextResponse.json(
@@ -53,7 +53,7 @@ export async function POST(req: Request): Promise<NextResponse<ActivateRegionalP
    * (timezone mismatch is false)
    * So we still return a successful response while acknowledging the result.
    */
-  if (vpnDetection?.methods?.osMismatch === true && vpnDetection.methods.timezoneMismatch === false) {
+  if (vpnDetection?.methods.osMismatch === true && vpnDetection.methods.timezoneMismatch === false) {
     const privateRelayNote =
       'It looks like you are using an IP anonymizing service (for example, Apple Private relay) without changing your location. You still get the discount!';
     return NextResponse.json(
@@ -68,13 +68,13 @@ export async function POST(req: Request): Promise<NextResponse<ActivateRegionalP
 
   if (vpnDetection?.result === true) {
     let reason = '';
-    if (vpnDetection.methods?.publicVPN) {
+    if (vpnDetection.methods.publicVPN) {
       reason = `Your IP address appears to be in ${locationName} but it's a known VPN IP address.`;
     }
-    if (vpnDetection.methods?.timezoneMismatch && vpnDetection.originTimezone) {
+    if (vpnDetection.methods.timezoneMismatch && vpnDetection.originTimezone) {
       reason = `Your IP address appears to be in ${locationName}, but your timezone is ${vpnDetection.originTimezone}.`;
     }
-    if (vpnDetection.methods?.auxiliaryMobile) {
+    if (vpnDetection.methods.auxiliaryMobile) {
       reason = `Your IP address appears to be in ${locationName}, but your phone is not.`;
     }
     return NextResponse.json(

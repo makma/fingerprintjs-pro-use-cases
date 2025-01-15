@@ -41,7 +41,7 @@ export function Personalization() {
   const { showNotification } = usePersonalizationNotification();
 
   useEffect(() => {
-    if (productsQuery.data?.data?.querySaved) {
+    if (productsQuery.data?.data.querySaved) {
       showNotification('Search query saved!');
     }
   }, [productsQuery.data, showNotification]);
@@ -57,7 +57,7 @@ export function Personalization() {
   useEffect(() => {
     if (
       data?.incognito &&
-      data?.visitorFound &&
+      data.visitorFound &&
       !userWelcomed &&
       (searchHistoryQuery.data?.data?.length || cartQuery.data?.data?.length)
     ) {
@@ -118,7 +118,7 @@ export function Personalization() {
                 <Spinner size={36} className={styles.spinner} />
               ) : (
                 <>
-                  {productsQuery.data?.data?.products?.length ? (
+                  {productsQuery.data?.data.products.length ? (
                     productsQuery.data.data.products.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))

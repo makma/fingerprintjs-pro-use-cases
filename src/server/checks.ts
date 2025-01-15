@@ -111,7 +111,7 @@ export const getAndValidateFingerprintResult = async ({
   if (sealedResult) {
     try {
       identificationEvent = await decryptSealedResult(sealedResult);
-      if (identificationEvent.products?.identification?.data?.requestId !== requestId) {
+      if (identificationEvent.products.identification?.data?.requestId !== requestId) {
         return {
           okay: false,
           error: 'Sealed result request ID does not match provided request ID, potential spoofing attack',
@@ -145,13 +145,13 @@ export const getAndValidateFingerprintResult = async ({
   }
 
   // Identification event must contain identification data
-  const identification = identificationEvent.products?.identification?.data;
+  const identification = identificationEvent.products.identification?.data;
   if (!identification) {
     return { okay: false, error: 'Identification data not found, potential spoofing attack.' };
   }
 
   // The client request must come from the same IP address as the identification request.
-  if (!visitIpMatchesRequestIp(identification?.ip, req)) {
+  if (!visitIpMatchesRequestIp(identification.ip, req)) {
     return { okay: false, error: 'Identification IP does not match request IP, potential spoofing attack.' };
   }
 
@@ -177,14 +177,14 @@ export const getAndValidateFingerprintResult = async ({
   /**
    * You can prevent Tor network users from performing sensitive actions in your application.
    */
-  if (options?.blockTor && identificationEvent.products?.tor?.data?.result === true) {
+  if (options?.blockTor && identificationEvent.products.tor?.data?.result === true) {
     return { okay: false, error: 'Tor network detected, please use a regular browser instead.' };
   }
 
   /**
    * You can prevent bots from performing sensitive actions in your application.
    */
-  if (options?.blockBots && identificationEvent.products?.botd?.data?.bot?.result === 'bad') {
+  if (options?.blockBots && identificationEvent.products.botd?.data?.bot.result === 'bad') {
     return { okay: false, error: '🤖 Malicious bot detected, the attempted action was denied.' };
   }
 
@@ -195,12 +195,12 @@ export const getAndValidateFingerprintResult = async ({
    * More info: https://dev.fingerprint.com/docs/understanding-your-confidence-score
    */
   if (
-    identification?.confidence?.score &&
-    identification?.confidence?.score < (options?.minConfidenceScore ?? env.MIN_CONFIDENCE_SCORE)
+    identification.confidence?.score &&
+    identification.confidence.score < (options?.minConfidenceScore ?? env.MIN_CONFIDENCE_SCORE)
   ) {
     return {
       okay: false,
-      error: `Identification confidence score too low (${identification?.confidence?.score}), potential spoofing attack.`,
+      error: `Identification confidence score too low (${identification.confidence.score}), potential spoofing attack.`,
     };
   }
 

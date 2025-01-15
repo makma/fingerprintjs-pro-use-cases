@@ -33,8 +33,8 @@ export async function POST(req: NextRequest): Promise<NextResponse<FlightsRespon
     return NextResponse.json({ severity: 'error', message: fingerprintResult.error }, { status: 403 });
   }
 
-  const identification = fingerprintResult.data.products?.identification?.data;
-  const botData = fingerprintResult.data.products?.botd?.data;
+  const identification = fingerprintResult.data.products.identification?.data;
+  const botData = fingerprintResult.data.products.botd?.data;
 
   // Backdoor for demo and testing purposes
   // If bot detection is disabled, just send the result
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<FlightsRespon
   }
 
   // If a bot is detected, return an error
-  if (botData.bot?.result === 'bad') {
+  if (botData.bot.result === 'bad') {
     // Optionally, here you could also save the bot's IP address to a blocklist in your database
     // and block all requests from this IP address in the future at a web server/firewall level.
     saveBotVisit(botData, identification?.visitorId ?? 'N/A');
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<FlightsRespon
   }
 
   // Check for unexpected bot detection value, just in case
-  if (!['notDetected', 'good'].includes(botData.bot?.result)) {
+  if (!['notDetected', 'good'].includes(botData.bot.result)) {
     return NextResponse.json(
       { severity: 'error', message: 'Server error, unexpected bot detection value.' },
       { status: 500 },

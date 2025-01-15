@@ -1,5 +1,5 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
-import SuccessIcon from './sucess.svg';
+import SuccessIcon from './success.svg';
 import ErrorIcon from './error.svg';
 import WarningIcon from './warning.svg';
 import InfoIcon from '../../img/InfoIconSvg.svg';
@@ -38,13 +38,24 @@ export const ALERT_ICON_MAP: Record<VariantType, any> = {
 /**
  * Static on-page alert/notification
  */
-export const Alert: FunctionComponent<AlertProps> = ({ severity, children, className, dataTestId }) => {
+export const Alert: FunctionComponent<AlertProps & { onClose?: () => void }> = ({
+  severity,
+  children,
+  className,
+  dataTestId,
+  onClose,
+}) => {
   const testAttributes = {
     'data-testid': classNames(TEST_IDS.common.alert, dataTestId),
     [TEST_ATTRIBUTES.severity]: severity,
   };
   return (
     <div className={classNames(styles.alert, STYLES_MAP[severity], className)} {...testAttributes}>
+      {onClose && (
+        <div className={styles.alertCloseIcon} onClick={onClose}>
+          x
+        </div>
+      )}
       <div className={styles.iconWrapper}>{ALERT_ICON_MAP[severity]}</div>
       <div>{children}</div>
     </div>

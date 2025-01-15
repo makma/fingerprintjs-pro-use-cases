@@ -90,6 +90,10 @@ export const TEST_IDS = {
     refreshButton: 'refreshButton',
     jsonLink: 'jsonLink',
   },
+  accountSharing: {
+    login: 'login',
+    password: 'password',
+  },
 } as const;
 
 export const TEST_ATTRIBUTES = {

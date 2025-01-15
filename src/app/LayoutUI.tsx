@@ -10,7 +10,7 @@ import styles from './LayoutUI.module.scss';
 
 export function LayoutUI({ children }: { children: React.ReactNode }) {
   const segments = useSelectedLayoutSegments();
-  const embed = Boolean(segments?.includes('embed'));
+  const embed = Boolean(segments.includes('embed'));
   return (
     <div className={styles.layout}>
       {embed ? null : <Header />}

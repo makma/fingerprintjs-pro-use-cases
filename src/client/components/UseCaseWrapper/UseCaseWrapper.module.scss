@@ -169,6 +169,10 @@ h1.title {
     }
   }
 
+  .noPadding {
+    padding: 0px;
+  }
+
   .content {
     border: 1px solid v('gray-box-stroke');
     border-radius: rem(12px);
@@ -280,3 +284,5 @@ h1.title {
     right: rem(16px);
   }
 }
+
+

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { useRouter } from 'next/navigation';
 import { FunctionComponent } from 'react';
 import { TEST_IDS } from '../../../client/testIDs';
 import Image from 'next/image';
 import styles from './articleGrid.module.scss';
 import BylineDot from './dot.svg';
 import { ArticleData } from '../api/articles';
+import Link from 'next/link';
 
 function calculateReadingTime(text: string[], wordsPerMinute = 200) {
   const words = text
@@ -42,11 +42,11 @@ type ArticleCardProps = {
 
 export const ArticleCard: FunctionComponent<ArticleCardProps> = ({ article, embed, isHeroArticle }) => {
   const link = `/paywall/article/${article.id}${embed ? '/embed' : ''}`;
-  const router = useRouter();
   return (
-    <div
+    <Link
+      href={link}
+      scroll={false}
       className={classNames(styles.articleCard, isHeroArticle && styles.heroArticleCard)}
-      onClick={() => router.push(link)}
       data-testid={TEST_IDS.paywall.articleCard}
     >
       <Image src={article.image} alt='' className={styles.articleCardImage} sizes='100vw' />
@@ -62,7 +62,7 @@ export const ArticleCard: FunctionComponent<ArticleCardProps> = ({ article, embe
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

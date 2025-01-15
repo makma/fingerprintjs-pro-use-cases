@@ -95,6 +95,7 @@ export function CollapsibleJsonViewer({ json, className, dataTestId }: JsonViewe
             CopyComponent={({ onClick, className }) => (
               <CopyButtonSvg onClick={onClick} className={classnames(className, styles.jsonViewerIcon)} />
             )}
+            // cspell:disable-next-line
             CopidComponent={({ className }) => (
               <CheckMarkSvg className={classnames(className, styles.jsonViewerIcon)} />
             )}

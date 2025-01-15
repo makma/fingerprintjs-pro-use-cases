@@ -7,7 +7,7 @@ export const ResourceLinks: FunctionComponent<{ resources: ResourceLink[] }> = (
   return (
     <Container size='large' className={styles.container}>
       <div className={styles.cardCollection}>
-        {resources?.map((resource, index) => (
+        {resources.map((resource, index) => (
           <a key={index} href={resource.url} target='_blank' rel='noreferrer' className={styles.card}>
             <div className={styles.type}>{resource.type}</div>
             <div className={styles.title}>{resource.title}</div>

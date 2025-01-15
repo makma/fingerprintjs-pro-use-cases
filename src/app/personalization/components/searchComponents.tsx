@@ -34,7 +34,7 @@ type SearchHistoryProps = {
 };
 
 export const SearchHistory: FunctionComponent<SearchHistoryProps> = ({ searchHistory, setSearchHistory }) => {
-  if (!searchHistory || searchHistory?.length === 0) {
+  if (!searchHistory || searchHistory.length === 0) {
     return null;
   }
 

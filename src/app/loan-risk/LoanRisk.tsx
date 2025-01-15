@@ -196,7 +196,7 @@ export function LoanRisk() {
               </div>
             </div>
             {loanRequestNetworkError && <Alert severity='error'>{loanRequestNetworkError.message}</Alert>}
-            {loanRequestResponse?.message && !isLoanRequestLoading && (
+            {loanRequestResponse?.message && (
               <Alert severity={loanRequestResponse.severity}>{loanRequestResponse.message}</Alert>
             )}
             <Button

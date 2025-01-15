@@ -11,6 +11,8 @@ $fontDir: '../fonts/';
 @include fontface('#{$fontDir}inter', 'Inter', '-v12-latin-600', 600);
 @include fontface('#{$fontDir}inter', 'Inter', '-v12-latin-700', 700);
 
+@include fontface('#{$fontDir}BebasNeue', 'Bebas Neue', '', 400);
+
 strong {
   font-weight: 700 !important;
 }
