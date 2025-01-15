@@ -42,6 +42,7 @@ export async function POST(req: Request): Promise<NextResponse<CreateAccountResp
   UserDbModel.create({
     username,
     passwordHash: hashString(password),
+    createdWithVisitorId: visitorId,
   });
 
   // Set the device as current device

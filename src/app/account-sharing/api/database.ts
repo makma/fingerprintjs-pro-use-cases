@@ -3,19 +3,22 @@ import { sequelize } from '../../../server/sequelize';
 import { defaultUser } from '../const';
 import { hashString } from '../../../server/server-utils';
 
-/** Accounts */
+/** Users */
 interface AccountAttributes
   extends Model<InferAttributes<AccountAttributes>, InferCreationAttributes<AccountAttributes>> {
   passwordHash: string;
   username: string;
+  createdWithVisitorId: string;
 }
 
-// Defines db model for login attempt.
 export const UserDbModel = sequelize.define<AccountAttributes>('account_sharing_user', {
   passwordHash: {
     type: DataTypes.STRING,
   },
   username: {
+    type: DataTypes.STRING,
+  },
+  createdWithVisitorId: {
     type: DataTypes.STRING,
   },
 });
@@ -25,69 +28,14 @@ UserDbModel.sync({ force: false });
 // Seed the database with the default user.
 UserDbModel.findOrCreate({
   where: { username: defaultUser.username },
-  defaults: { username: defaultUser.username, passwordHash: hashString(defaultUser.password) },
+  defaults: {
+    username: defaultUser.username,
+    passwordHash: hashString(defaultUser.password),
+    createdWithVisitorId: '',
+  },
 });
 
 export type User = Attributes<AccountAttributes>;
-
-/** Logins */
-interface LoginAttributes extends Model<InferAttributes<LoginAttributes>, InferCreationAttributes<LoginAttributes>> {
-  visitorId: string;
-  username: string;
-  timestamp: Date;
-  operation: 'login' | 'logout';
-  success: boolean;
-}
-
-export const LoginDbModel = sequelize.define<LoginAttributes>('account_sharing_login', {
-  visitorId: {
-    type: DataTypes.STRING,
-  },
-  username: {
-    type: DataTypes.STRING,
-  },
-  timestamp: {
-    type: DataTypes.DATE,
-  },
-  operation: {
-    type: DataTypes.ENUM('login', 'logout'),
-  },
-  success: {
-    type: DataTypes.BOOLEAN,
-  },
-});
-
-LoginDbModel.sync({ force: false });
-
-export type Login = Attributes<LoginAttributes>;
-
-/** Sessions */
-interface SessionAttributes
-  extends Model<InferAttributes<SessionAttributes>, InferCreationAttributes<SessionAttributes>> {
-  visitorId: string;
-  username: string;
-  sessionId: string;
-  timestamp: Date;
-}
-
-export const SessionDbModel = sequelize.define<SessionAttributes>('account_sharing_session', {
-  visitorId: {
-    type: DataTypes.STRING,
-  },
-  username: {
-    type: DataTypes.STRING,
-  },
-  sessionId: {
-    type: DataTypes.STRING,
-  },
-  timestamp: {
-    type: DataTypes.DATE,
-  },
-});
-
-SessionDbModel.sync({ force: false });
-
-export type Session = Attributes<SessionAttributes>;
 
 /** Current Devices */
 interface DeviceAttributes extends Model<InferAttributes<DeviceAttributes>, InferCreationAttributes<DeviceAttributes>> {

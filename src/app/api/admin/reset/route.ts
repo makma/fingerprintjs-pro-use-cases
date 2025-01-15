@@ -9,6 +9,7 @@ import { syncFirewallRuleset } from '../../../bot-firewall/api/block-ip/cloudfla
 import { deleteBlockedIp } from '../../../bot-firewall/api/get-blocked-ips/blockedIpsDatabase';
 import { PaymentAttemptDbModel } from '../../../payment-fraud/api/place-order/database';
 import { NextRequest, NextResponse } from 'next/server';
+import { DeviceDbModel, UserDbModel } from '../../../account-sharing/api/database';
 
 export type ResetResponse = {
   message: string;
@@ -69,6 +70,11 @@ const deleteVisitorData = async (visitorId: string, ip: string) => {
       return deletedIpCount;
     }),
     deletedSmsVerificationRequests: await tryToDestroy(() => SmsVerificationDatabaseModel.destroy(options)),
+    deletedAccountSharingRecords: await tryToDestroy(async () => {
+      const deletedUserCount = await UserDbModel.destroy({ where: { createdWithVisitorId: visitorId } });
+      const deletedCurrentDevicesCount = await DeviceDbModel.destroy(options);
+      return deletedUserCount + deletedCurrentDevicesCount;
+    }),
   };
 };
 
