@@ -90,6 +90,18 @@ export const TEST_IDS = {
     refreshButton: 'refreshButton',
     jsonLink: 'jsonLink',
   },
+  accountSharing: {
+    usernameInput: 'usernameInput',
+    passwordInput: 'passwordInput',
+    loginButton: 'loginButton',
+    signUpButton: 'signUpButton',
+    forceLoginButton: 'forceLoginButton',
+    challengeGoBackButton: 'challengeGoBackButton',
+    logoutButton: 'logoutButton',
+    contentCard: 'contentCard',
+    switchToLoginButton: 'switchToLoginButton',
+    switchToSignUpButton: 'switchToSignUpButton',
+  },
 } as const;
 
 export const TEST_ATTRIBUTES = {

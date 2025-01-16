@@ -80,11 +80,11 @@ export default function Header({ notificationBar }: HeaderProps) {
                   dropdownProps={{
                     leftColumns: [
                       {
-                        list: USE_CASES_NAVIGATION.slice(0, 5),
+                        list: USE_CASES_NAVIGATION.slice(0, 6),
                         cardBackground: true,
                       },
                       {
-                        list: USE_CASES_NAVIGATION.slice(5),
+                        list: USE_CASES_NAVIGATION.slice(6),
                         cardBackground: true,
                       },
                     ],

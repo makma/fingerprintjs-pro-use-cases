@@ -1,0 +1,238 @@
+form.accountSharingForm {
+  .alert {
+    margin: rem(24px) 0;
+  }
+  button[type='submit'] {
+    margin: 0 auto;
+    margin-top: rem(24px);
+  }
+
+  input.password {
+    margin-bottom: 0;
+  }
+
+  .showHideIcon {
+    margin-left: rem(-40px);
+    cursor: pointer;
+
+    @include media('<=250px') {
+      display: none;
+    }
+  }
+}
+
+.formTitle {
+  margin-top: rem(24px);
+  margin-bottom: rem(24px);
+  font-size: rem(24px);
+  font-weight: 700;
+  text-align: center;
+
+  @include media('<=phone') {
+    font-size: rem(20px);
+  }
+}
+
+.switchMode {
+  margin-top: rem(24px);
+  text-align: center;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: v('orange-gradient');
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  @include media('<=phone') {
+    font-size: rem(14px);
+  }
+}
+
+.challengeButtons {
+  display: flex;
+  gap: rem(16px);
+  flex-wrap: wrap;
+
+  // grow buttons to fill space
+  button {
+    flex-grow: 1;
+  }
+}
+
+.backArrow {
+  margin: rem(24px) auto;
+}
+
+.loggedOutAlert {
+  margin-bottom: rem(24px);
+}
+
+.loggedOutAlertTitle {
+  font-weight: 700;
+  margin-bottom: rem(10px);
+}
+
+
+/**
+ * Home page
+ */
+
+.homeContainer {
+  --horizontal-padding: 32px;
+
+  @include media('<=phone') {
+    --horizontal-padding: 16px;
+  }
+
+  min-height: 90vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: rem(16px);
+  padding-bottom: rem(16px);
+  padding-left: var(--horizontal-padding);
+  padding-right: var(--horizontal-padding);
+
+  h1 {
+    font-size: rem(32px);
+    font-weight: 700;
+    font-family: Bebas Neue, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .headerRight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: rem(16px);
+    color: white;
+  }
+
+  @include media('<=phoneSmall') {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: rem(16px);
+  }
+}
+
+.loading {
+  margin-top: rem(8px);
+  text-align: center;
+}
+
+.homeContent {
+  padding: rem(8px) var(--horizontal-padding);
+
+  h3 {
+    margin-top: rem(8px);
+    font-size: rem(16px);
+    font-family: Inter;
+    font-weight: 500;
+  }
+
+}
+
+.categoryTitle {
+  display: flex;
+  align-items: center;
+
+  .scrollButton {
+    cursor: pointer;
+    display: flex;
+    align-items: last baseline;
+    padding: rem(2px);
+
+    &:hover {
+      background-color: v('gray-box-stroke');
+    }
+
+    &:first-of-type {
+      margin-left: 4px;
+    }
+  } 
+}
+
+.cardsRow {
+  --gap: 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: var(--gap);
+  scroll-padding: 0 20px;
+  padding-top: rem(4px);
+  padding-bottom: rem(4px);
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 0 0 calc(var(--horizontal-padding) - var(--gap));
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  & ::-webkit-scrollbar {
+    display: none;
+  }
+
+   /* Hide scrollbar for IE, Edge and Firefox */
+   & {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.card {
+  color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: stretch;
+  border-radius: rem(6px);
+  border: 1px solid v('gray-box-stroke');
+  width: rem(250px);
+  height: rem(150px);
+  text-align: center;
+
+  flex: 0 0 auto;
+  padding: rem(24px);
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+
+  transition: transform 0.2s ease-in-out;
+
+  .cardTitle {
+    background-color: rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  // small screens
+  @include media('<=phone') {
+    width: rem(200px);
+    height: rem(120px);
+  }
+}
+
+.spacer {
+  height: rem(32px);
+
+  @include media('<=phoneSmall') {
+    height: rem(16px);
+  }
+}

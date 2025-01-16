@@ -1,12 +1,12 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { SnackbarProvider } from 'notistack';
 import { PropsWithChildren } from 'react';
 import { FingerprintJSPro, FpjsProvider } from '@fingerprintjs/fingerprintjs-pro-react';
 import { env } from '../env';
 import { CloseSnackbarButton, CustomSnackbar } from '../client/components/Alert/Alert';
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -26,6 +26,7 @@ export const FP_LOAD_OPTIONS: FingerprintJSPro.LoadOptions = {
 function Providers({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <SnackbarProvider
         action={(snackbarId) => <CloseSnackbarButton snackbarId={snackbarId} />}
         maxSnack={4}
